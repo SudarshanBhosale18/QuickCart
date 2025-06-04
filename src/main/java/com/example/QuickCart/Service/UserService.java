@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.QuickCart.Model.User;
-import com.example.QuickCart.Repository.ItemRepository.UserRepository;
+import com.example.QuickCart.Repository.UserRepository;
 
 @Service
 public class UserService {
