@@ -1,0 +1,33 @@
+<div class="cart-container">
+  <h2>Your Shopping Cart</h2>
+
+  <div *ngIf="(cartService.currentCartItems | async)?.length; else emptyCart">
+    <div *ngFor="let item of cartService.currentCartItems | async" class="cart-item">
+      <img [src]="item.product.image" [alt]="item.product.name">
+      <div class="item-details">
+        <h3>{{ item.product.name }}</h3>
+        <p>{{ cartService.formatINR(item.product.price) }}</p>
+        <div class="quantity-control">
+          <button (click)="updateQuantity(item.product.id, -1)">-</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="updateQuantity(item.product.id, 1)">+</button>
+        </div>
+        <button (click)="removeItem(item.product.id)">Remove</button>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <h3>Total: {{ cartService.formatINR(getTotalPrice()) }}</h3>
+      <div class="cart-actions">
+        <button (click)="clearCart()">Clear Cart</button>
+        <button (click)="proceedToCheckout()">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <p>Your cart is empty</p>
+    </div>
+  </ng-template>
+</div>
